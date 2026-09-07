@@ -44,11 +44,5 @@ Mevcut diğer addon repon ve sayfan değişmez.
 - Üç skyline sekmesi mevcut örnek renderları gösterir; ürünün tüm flavourlarının ayrı ayrı gösterimi değildir.
 - Yayına alınmış Superhive editöründe iframe testi yapılmadı. Light Master Pro aynı dış sayfa + iframe yöntemini kullanıyor, fakat bu paketin görünümü yayın sonrası kontrol edilmeli.
 
-## Güncelleme
-
-`index.html` veya görselleri aynı adla repoya yükleyip commit et. Pages yeniden yayınlar; Superhive iframe adresini değiştirmek gerekmez.
-
-Resmî rehber:
-https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 
 © Skettch 2026
