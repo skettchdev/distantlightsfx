@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DistantLightsFX — The city beyond your shot | Skettch</title>
+<meta name="description" content="Procedural city backgrounds for Blender. Explore skyline styles, lighting moods, Draft to Detail and animated city elements with DistantLightsFX by Skettch.">
+<link rel="icon" href="data:,">
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=KBAeNXD87jkMwwQeyiqHKqAjuYUZGcArfM_CmlWbyTaepUkL6YkLHSc1Xv8GlRGVODbrADE0CY5x6uJPxt-bR-Nw8XQrgobdH_3PxJ9Za3j77No2VlyCWC5epDBpQwaJrk0_mOi-kgzQaIvWfYkBCdN4ZBvV2vSMIadT9TF4g7xxOwVhyoBEaIMXXsUmDgoiVwGOf0uBL3-SR9JROBILfvTpAleZNjj18X_h_6ZvQGw1f9bQTBpWfji-UWFiw5v7isgPQtrR7zaK1y6VdPYENSVnrI-OXoLDZ-1dJBtE3I_3_BU3fQrUwSKrSY0gLYPc" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jaGF0Z3B0LmNvbS9iYWNrZW5kLWFwaS9lc3R1YXJ5L2NvbnRlbnQ_aWQ9ZmlsZV8wMDAwMDAwMDMzMDA4MWY0YjRmYzgzZTE3ZTE2ZTVhMiZmbj1pbmRleCUyODElMjkuaHRtbCZjZD1hdHRhY2htZW50JnRzPTQ5NjkxNyZwPWZzJmNpZD0xJnNpZz1jNjA1ODBjMzdmOTY0MTMwZTQ2MGMxYjBmNGY5OTFkNDU5Zjg2OTAxYTlmZmMwYjFhNWNkZmQzY2NkNjI0ZjljJnY9MA"/><style>
+  :root{
+    --bg:#060a13; --bg2:#0b1120; --panel:#101a2c; --line:#1b2740; --line2:#25334f;
+    --text:#e8edf7; --muted:#8a97b1; --amber:#f5b942; --amber2:#ffd47a; --blue:#6aa8ff; --rose:#f2a7c2;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  a{color:var(--amber2);text-decoration:none}
+  img,video{max-width:100%;display:block}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{line-height:1.12;margin:0 0 .5em;letter-spacing:-.015em}
+  h1{font-size:clamp(38px,6vw,72px);font-weight:800}
+  h2{font-size:clamp(26px,3.2vw,38px);font-weight:700}
+  h3{font-size:18px;font-weight:600}
+  p{margin:0 0 1em}
+  .muted{color:var(--muted)}
+  .eyebrow{display:inline-block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;font-weight:600}
+  section{padding:80px 0}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent)}
+  .sub{max-width:720px;color:var(--muted);font-size:16px}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden;background:#000}
+  .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 52%;filter:saturate(1.05)}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,10,19,.92) 0%,rgba(6,10,19,.55) 45%,rgba(6,10,19,.12) 100%),linear-gradient(180deg,rgba(6,10,19,0) 55%,rgba(6,10,19,.96) 100%)}
+  .hero .wrap{position:relative;z-index:1;padding-bottom:72px;padding-top:140px}
+  .hero .brand{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#cbd5e6;margin-bottom:18px}
+  .hero .brand i{width:26px;height:2px;background:var(--amber);display:inline-block}
+  .lead{font-size:clamp(17px,2vw,22px);max-width:680px;color:#d7deeb;margin-bottom:22px}
+  .badges{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 30px}
+  .badge{border:1px solid rgba(255,255,255,.16);background:rgba(8,12,24,.55);backdrop-filter:blur(8px);padding:6px 12px;border-radius:999px;font-size:13px;color:#d7deeb}
+  .badge b{color:var(--amber2);font-weight:600}
+  .cta{display:inline-flex;align-items:center;gap:10px;background:var(--amber);color:#1a1200;font-weight:700;padding:15px 24px;border-radius:12px;margin-right:12px;transition:transform .15s}
+  .cta:hover{transform:translateY(-1px)}
+  .cta.ghost{background:rgba(8,12,24,.5);color:var(--text);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px)}
+  .hero .hint{position:absolute;right:24px;bottom:24px;z-index:1;font-size:12px;color:#8a97b1;background:rgba(6,10,19,.6);padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.08)}
+
+  /* ---------- numbers ---------- */
+  .numbers{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .numbers div{background:var(--bg2);padding:22px 18px}
+  .numbers strong{display:block;font-size:28px;font-weight:800;color:var(--amber2);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .numbers span{font-size:12.5px;color:var(--muted)}
+  .numbers-note{font-size:12.5px;color:#5f6b85;margin-top:10px}
+
+  /* ---------- places strip ---------- */
+  .places{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .place{position:relative;border-radius:12px;overflow:hidden;background:var(--panel);aspect-ratio:3/4;cursor:pointer;border:1px solid var(--line)}
+  .place img{width:100%;height:100%;object-fit:cover;object-position:center 55%;transition:transform .6s}
+  .place:hover img{transform:scale(1.05)}
+  .place .cap{position:absolute;left:0;right:0;bottom:0;padding:60px 14px 14px;background:linear-gradient(180deg,transparent,rgba(4,7,14,.92))}
+  .place .cap b{display:block;font-size:16px}
+  .place .cap span{font-size:12.5px;color:#aab4c8}
+
+  /* ---------- mood compare ---------- */
+  .compare{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);aspect-ratio:940/520;user-select:none;background:#000}
+  .compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .compare .after{clip-path:inset(0 0 0 50%)}
+  .compare .handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.4);pointer-events:none}
+  .compare .knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--amber);color:#1a1200;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;box-shadow:0 8px 24px rgba(0,0,0,.5);pointer-events:none}
+  .compare .lbl{position:absolute;top:14px;padding:5px 10px;border-radius:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:rgba(6,10,19,.65);border:1px solid rgba(255,255,255,.12);pointer-events:none}
+  .compare .lbl.l{left:14px}.compare .lbl.r{right:14px}
+  .compare input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+  .moods{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
+  .moods button{all:unset;cursor:pointer;border-radius:8px;overflow:hidden;border:2px solid transparent;position:relative}
+  .moods button.on{border-color:var(--amber)}
+  .moods img{aspect-ratio:16/9;object-fit:cover;width:100%}
+  .moods span{position:absolute;left:0;right:0;bottom:0;font-size:11px;padding:3px 6px;background:rgba(4,7,14,.7);text-align:center}
+  .mood-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:24px;align-items:start}
+  .mood-side video{border-radius:12px;border:1px solid var(--line)}
+  .mood-side p{font-size:14px}
+
+  /* ---------- features ---------- */
+  .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+  .fcard img{aspect-ratio:16/9;object-fit:cover;object-position:center 45%;width:100%}
+  .fcard .body{padding:18px 20px 22px}
+  .fcard h3{font-size:17px;margin-bottom:6px}
+  .fcard p{font-size:14px;color:var(--muted);margin:0}
+  .fcard .tag{display:inline-block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+
+  /* ---------- draft/full ---------- */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .two figure{margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
+  .two img{width:100%;aspect-ratio:16/9;object-fit:cover}
+  .two figcaption{padding:10px 14px;font-size:13px;color:var(--muted);background:var(--bg2)}
+  .arrowline{display:flex;gap:14px;align-items:center;margin:26px 0 0;flex-wrap:wrap}
+  .pill{border:1px solid var(--line2);background:var(--bg2);padding:8px 14px;border-radius:999px;font-size:13px}
+  .pill b{color:var(--amber2)}
+
+  /* ---------- car gallery ---------- */
+  .cars{columns:3;column-gap:12px}
+  .cars figure{margin:0 0 12px;break-inside:avoid;border-radius:12px;overflow:hidden;position:relative;background:var(--panel)}
+  .cars img{width:100%;transition:transform .5s}
+  .cars figure:hover img{transform:scale(1.03)}
+  .cars figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 12px 10px;font-size:12px;color:#dfe5f0;background:linear-gradient(180deg,transparent,rgba(4,7,14,.85))}
+
+  /* ---------- panel tour ---------- */
+  .tour{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:start}
+  .tabs{display:flex;flex-direction:column;gap:6px;position:sticky;top:20px}
+  .tabs button{all:unset;cursor:pointer;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);font-size:14px;color:#c9d2e2;display:flex;justify-content:space-between;align-items:center}
+  .tabs button.on{border-color:var(--amber);color:#fff;background:#141f36}
+  .tabs button small{color:var(--muted);font-size:11px}
+  .tour-panel{display:grid;grid-template-columns:330px 1fr;gap:28px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .tour-panel .shot{border-radius:10px;overflow:hidden;border:1px solid var(--line2);max-height:640px;overflow-y:auto;background:#1a1a1a}
+  .tour-panel .shot img{width:100%}
+  .tour-panel ul{padding-left:18px;margin:10px 0 0;color:#c9d2e2;font-size:14px}
+  .tour-panel li{margin-bottom:7px}
+  .tour-panel .desc{display:none}.tour-panel .desc.on{display:block}
+
+  /* ---------- axes ---------- */
+  .axes{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .axis{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:18px 16px}
+  .axis h3{font-size:15px;color:var(--amber2);margin-bottom:6px}
+  .axis p{font-size:13px;color:var(--muted);margin:0}
+
+  /* ---------- specs/faq ---------- */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  td:first-child{color:var(--muted);width:32%}
+  details{border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px;background:var(--bg2)}
+  summary{cursor:pointer;font-weight:600}
+  details p{margin:10px 0 0;color:#c9d2e2;font-size:14px}
+
+  /* ---------- lightbox ---------- */
+  .lb{position:fixed;inset:0;background:rgba(3,5,10,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:24px;cursor:zoom-out}
+  .lb.on{display:flex}
+  .lb img{max-height:92vh;max-width:96vw;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.8)}
+
+  footer{padding:60px 0 30px;text-align:center}
+  footer .copy{font-size:12px;color:#5f6a82;margin:0}
+  footer .ver{font-size:12px;color:#4a536a;margin:4px 0 0}
+
+  @media (max-width:980px){
+    .numbers{grid-template-columns:repeat(3,1fr)}
+    .places{grid-template-columns:repeat(2,1fr)}
+    .mood-grid,.two,.tour,.tour-panel{grid-template-columns:1fr}
+    .fgrid{grid-template-columns:1fr 1fr}
+    .cars{columns:2}
+    .axes{grid-template-columns:1fr 1fr}
+    .tabs{position:static;flex-direction:row;flex-wrap:wrap}
+    .moods{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:600px){
+    .numbers{grid-template-columns:repeat(2,1fr)}
+    .fgrid,.cars{columns:1;grid-template-columns:1fr}
+    .axes{grid-template-columns:1fr}
+  }
+
+/* Release layout: contained, responsive and iframe-friendly. */
+:root{--muted:#a6b2c8;--bg:#070b13;--panel:#101827}
+body{font-size:16px;overflow-x:hidden}button,a,input{touch-action:manipulation}button{font:inherit}button:focus-visible,a:focus-visible,input:focus-visible,[role=button]:focus-visible{outline:3px solid #f5b942;outline-offset:5px}section{scroll-margin-top:100px;padding:64px 0}.wrap{max-width:1100px}img{color:#a6b2c8}p{overflow-wrap:break-word}
+.site-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 24px;background:rgba(7,11,19,.96);border-bottom:1px solid #25334f;backdrop-filter:blur(14px)}.site-nav a{color:#dbe2ef;font-size:14px}.site-nav>div{display:flex;gap:20px;flex-wrap:wrap}.wordmark{font-weight:800;letter-spacing:.08em}.wordmark span{color:#8898b2;font-size:12px}.hero-new{background:#05080e}.hero-new>img{width:100%;height:auto;max-height:660px;object-fit:contain}.intro{max-width:1100px;margin:auto;padding:44px 24px 54px}.intro h1{font-size:clamp(30px,5vw,56px);max-width:900px}.intro .lead{font-size:18px;max-width:780px}.summary-strip{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #25334f;border-bottom:1px solid #25334f;padding:24px 0;gap:20px;margin-top:28px}.summary-strip strong{display:block;color:#ffd47a;font-size:25px}.summary-strip span{color:#a6b2c8;font-size:14px}
+.character-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 12px}.character-tabs button{padding:12px 20px;border:1px solid #283851;border-radius:8px;background:#111b2c;color:#cbd5e6;cursor:pointer}.character-tabs button[aria-selected=true]{background:#f5b942;color:#100d08;border-color:#f5b942}.character-stage{position:relative;overflow:hidden;border:1px solid #25334f;border-radius:14px;background:#090d14;aspect-ratio:16/9}.character-stage>img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}.character-caption{position:absolute;bottom:0;left:0;right:0;padding:60px 28px 22px;background:linear-gradient(transparent,rgba(4,7,14,.96))}.character-caption h3{font-size:30px}.character-caption p{max-width:620px;margin:0;color:#cbd5e6}.fine{font-size:13px;margin-top:12px}.places{grid-template-columns:repeat(3,minmax(0,1fr))}.place{aspect-ratio:4/3}.place .cap{padding-top:35px}.place .cap span{font-size:14px}.place .cap b{font-size:20px}.mood-side .sequence{width:100%;border-radius:12px}.moods span{font-size:12px}.fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.fcard p,.tour-panel ul,.tour-panel p,.axis p{font-size:16px}.tour{grid-template-columns:210px minmax(0,1fr);gap:18px}.tour-panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;padding:20px}.tour-panel .shot{max-height:650px}.tour-panel .desc,.tour-panel .shot{min-width:0}.tabs{top:90px}.tabs button{min-height:44px;gap:8px}.tabs button small{font-size:12px}.cars figcaption{font-size:14px}.axes{grid-template-columns:repeat(3,minmax(0,1fr))}.lb{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;border:0;background:rgba(3,5,10,.96);padding:50px 20px;cursor:zoom-out}.lb[open]{display:flex;align-items:center;justify-content:center}.lb img{max-height:86dvh;max-width:95vw;object-fit:contain}.lb::backdrop{background:rgba(3,5,10,.8)}.lb-close{position:absolute;right:20px;top:12px;width:42px;height:42px;border:1px solid #63708a;border-radius:50%;background:#111b2c;color:white;font-size:28px;cursor:pointer}.fcard{transition:border-color .2s,transform .2s}.fcard:hover{border-color:#756441;transform:translateY(-3px)}.image-error{min-height:120px;background:#111b2c;border:1px solid #37445c}.media-note{color:#a6b2c8;font-size:13px;padding:10px}#specs{grid-template-columns:1fr 1fr!important}
+@media(max-width:850px){.site-nav{position:relative;flex-wrap:wrap}.site-nav>div{gap:16px}.tour,.tour-panel{grid-template-columns:1fr}.tabs{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.tour-panel .shot{max-height:440px}.mood-grid{grid-template-columns:1fr}.places{grid-template-columns:repeat(2,minmax(0,1fr))}.axes{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-strip{grid-template-columns:repeat(2,1fr)}#specs{grid-template-columns:1fr!important}}
+@media(max-width:540px){.wrap{padding:0 16px}.intro{padding:28px 16px}.intro .cta{display:flex;justify-content:center;margin:0 0 12px}.site-nav{padding:14px 16px}.wordmark span{display:none}.site-nav>div{gap:12px}.site-nav a{font-size:13px}.character-stage{aspect-ratio:auto}.character-stage>img{aspect-ratio:16/10;height:auto}.character-caption{position:relative;padding:18px;background:#0d1522}.character-caption .eyebrow{margin-bottom:6px}.character-caption h3{font-size:24px}.places,.fgrid,.two,.axes{grid-template-columns:1fr}.place{aspect-ratio:16/9}.cars{columns:1}.tour-panel{padding:14px}.moods{grid-template-columns:repeat(3,1fr)}.tabs button{display:block}.tabs small{display:block}.summary-strip strong{font-size:22px}section{padding:42px 0}h2{font-size:28px}.hero-new>img{min-height:0}.character-tabs button{padding:10px 14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Page sections"><a href="#top" class="wordmark">SKETTCH<span> / DISTANTLIGHTSFX</span></a><div><a href="#places">Cities</a><a href="#mood">Atmosphere</a><a href="#workflow">Workflow</a><a href="#features">Features</a><a href="#panel">Controls</a></div></nav>
+<header id="top" class="hero-new"><img src="assets/hero.png" alt="DistantLightsFX — City backgrounds for Blender. Silver sports car in front of a softly lit night city. Promotional composite; vehicle not included." fetchpriority="high"><div class="intro"><span class="eyebrow">Your foreground. A world behind it.</span><h1>The city beyond your shot.</h1><p class="lead">Procedural skylines, illuminated windows and moving city elements for the horizon of your automotive and cinematic scenes.</p><a class="cta" href="#places">Explore the cities</a><a class="cta ghost" href="#workflow">See Draft → Detail</a></div></header>
+<div class="wrap"><div class="summary-strip"><div><strong>7</strong><span>Skyline flavours</span></div><div><strong>5</strong><span>Place presets</span></div><div><strong>Draft → Detail</strong><span>Compose before the full build</span></div><div><strong>Day / Night</strong><span>Set the atmosphere</span></div></div></div>
+<!-- ================= PLACES ================= -->
+<section id="places" style="padding-top:36px">
+  <div class="wrap">
+    <span class="eyebrow">Place presets</span>
+    <h2>Choose the scale. Find the character.</h2>
+    <p class="sub">Switch <b>Place</b> and the generator changes massing, lamp colour, density and the structures it is allowed to build. Add a <b>Flavour</b> for a different roofline, colour bias and exclusive landmarks. Select a character below or enlarge a place preview.</p>
+    <div class="character-tabs" role="tablist" aria-label="Skyline render examples"><button type="button" role="tab" aria-selected="true" aria-controls="character-panel" id="character-0" data-character="0">Generic</button><button type="button" role="tab" aria-selected="false" tabindex="-1" aria-controls="character-panel" id="character-1" data-character="1">Istanbul</button><button type="button" role="tab" aria-selected="false" tabindex="-1" aria-controls="character-panel" id="character-2" data-character="2">Hong Kong</button></div><div class="character-stage" id="character-panel" role="tabpanel" aria-labelledby="character-0"><img id="characterImage" src="https://assets.superhivemarket.com/cache/85cb2c085649d37f77f71ebcfbd43524.jpg" alt="Generic skyline example"><div class="character-caption"><span class="eyebrow">Skyline examples</span><h3 id="characterTitle">Generic</h3><p id="characterText">A flexible city backdrop, from residential blocks to a denser tower silhouette.</p></div></div><p class="muted fine">Three flavour previews shown here. Place, density and terrain settings also influence the result.</p><div class="places" style="margin-top:28px">
+      <div class="place" data-full="assets/skettch-demo-6.gif"><img loading="lazy" decoding="async" src="assets/skettch-demo-6.gif" alt=""><div class="cap"><b>Metropolis</b><span>Dense tower core, 40+ floor landmarks, waterfront</span></div></div>
+      <div class="place" data-full="assets/skettch-demo-4.gif"><img loading="lazy" decoding="async" src="assets/skettch-demo-4.gif" alt=""><div class="cap"><b>City</b><span>Mid-rise blocks, a few towers, broadcast mast</span></div></div>
+      <div class="place" data-full="https://assets.superhivemarket.com/cache/16294a8520e5dae000a5ee6ca77eb48d.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/16294a8520e5dae000a5ee6ca77eb48d.jpg" alt=""><div class="cap"><b>City · Istanbul flavour</b><span>Low-rise carpet, minarets &amp; domes, residential towers</span></div></div>
+      <div class="place" data-full="https://assets.superhivemarket.com/cache/bedef83c4bf058b667a807c56cec5eeb.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/bedef83c4bf058b667a807c56cec5eeb.jpg" alt=""><div class="cap"><b>Suburb</b><span>Houses and gardens, one chimney, sodium lamps</span></div></div>
+      <div class="place" data-full="https://assets.superhivemarket.com/cache/9b28082613feeb8379d4378b7cb181c8.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/9b28082613feeb8379d4378b7cb181c8.jpg" alt=""><div class="cap"><b>Village</b><span>Cottages along the shore, tree-covered hills</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= MOOD ================= -->
+<section id="mood">
+  <div class="wrap">
+    <span class="eyebrow">Mood &amp; time of night</span>
+    <h2>Same city, any hour</h2>
+    <p class="sub">Mood presets drive the procedural sky, haze, glow and how many windows are still lit. Drag the handle — compare the daylight and night examples.</p>
+    <div class="mood-grid" style="margin-top:28px">
+      <div>
+        <div class="compare" id="cmp">
+          <img class="before" id="cmpBefore" src="https://assets.superhivemarket.com/cache/7aa51374ccb1dba93a984f4782d56d21.jpg" alt="Day">
+          <img class="after" id="cmpAfter" src="https://assets.superhivemarket.com/cache/a8aef26adc63ea4ee806f99ed9ceedf2.jpg" alt="Night">
+          <div class="handle" id="cmpHandle"></div>
+          <div class="knob" id="cmpKnob">⇔</div>
+          <span class="lbl l" id="lblL">Day</span><span class="lbl r" id="lblR">Night</span>
+          <input type="range" min="0" max="100" value="50" id="cmpRange" aria-label="Compare moods">
+        </div>
+        <div class="moods" id="moods">
+          <button data-src="https://assets.superhivemarket.com/cache/7aa51374ccb1dba93a984f4782d56d21.jpg" data-name="Day" class="on"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/7aa51374ccb1dba93a984f4782d56d21.jpg" alt=""><span>Day</span></button>
+          <button data-src="https://assets.superhivemarket.com/cache/ae3e665838541f87f40e1c054bd52415.jpg" data-name="Golden hour"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/ae3e665838541f87f40e1c054bd52415.jpg" alt=""><span>Golden hour</span></button>
+          <button data-src="https://assets.superhivemarket.com/cache/ebea0b049a87e44e0b98e6a4e6f5475e.jpg" data-name="Dusk"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/ebea0b049a87e44e0b98e6a4e6f5475e.jpg" alt=""><span>Dusk</span></button>
+          <button data-src="https://assets.superhivemarket.com/cache/068b5a656e181e633fcca3791f107a7b.jpg" data-name="Blue hour"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/068b5a656e181e633fcca3791f107a7b.jpg" alt=""><span>Blue hour</span></button>
+          <button data-src="https://assets.superhivemarket.com/cache/d4958d239f12298097bfda45c26c9f56.jpg" data-name="Hazy night"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/d4958d239f12298097bfda45c26c9f56.jpg" alt=""><span>Hazy night</span></button>
+          <button data-src="https://assets.superhivemarket.com/cache/a8aef26adc63ea4ee806f99ed9ceedf2.jpg" data-name="Late night"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/a8aef26adc63ea4ee806f99ed9ceedf2.jpg" alt=""><span>Late night</span></button>
+        </div>
+        <p class="muted" style="font-size:12.5px;margin-top:8px">Click a thumbnail to set the <b>left</b> side of the comparison.</p>
+      </div>
+      <div class="mood-side">
+        <img loading="lazy" decoding="async" class="sequence" src="https://assets.superhivemarket.com/cache/b4aa18891c4789a17f3d266c7a2e635e.gif" alt="Animated DistantLightsFX demonstration" loading="lazy">
+        <h3 style="margin-top:16px">Choose the mood, then fine-tune</h3>
+        <p class="muted">Use Auto Update to refresh the city as you adjust its settings. Tune the sky, haze and glow to match the lighting of your foreground.</p>
+        <p class="muted">Keep your own HDRI if you prefer — the built-in sky is a checkbox.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= DRAFT → FULL ================= -->
+<section id="workflow">
+  <div class="wrap">
+    <span class="eyebrow">Workflow</span>
+    <h2>Find the composition. Then build the detail.</h2>
+    <p class="sub"><b>Build Draft</b> lays out the whole city as solid volumes so you can frame the shot. <b>Detail City / Build Full City</b> completes facades, windows, lamps, movers and materials. <b>Lock City</b> then freezes the result so nothing regenerates behind your back.</p>
+    <div class="two" style="margin-top:28px">
+      <figure><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/0451b6fd298224c770bf7194c1bf41f1.jpg" alt=""><figcaption>Draft: tower district, block grid and landmark reservations </figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/fdfed5842690b215e0f49e79d26aa3b2.gif" alt=""><figcaption>Draft → Full City in one click</figcaption></figure>
+    </div>
+    <div class="arrowline">
+      <span class="pill"><b>1</b> Frame your camera(s)</span>
+      <span class="pill"><b>2</b> Pick Place · Busyness · Distance · Extent · Mood</span>
+      <span class="pill"><b>3</b> Build Draft</span>
+      <span class="pill"><b>4</b> Build Full City → render</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= FEATURES ================= -->
+<section id="features">
+  <div class="wrap">
+    <span class="eyebrow">What's in the box</span>
+    <h2>Built from how real skylines look at night</h2>
+    <div class="fgrid" style="margin-top:28px">
+      <div class="fcard"><img loading="lazy" decoding="async" src="assets/skettch-demo-7.gif" alt=""><div class="body"><span class="tag">Facades &amp; windows</span><h3>Windows with rooms behind them</h3><p>Window rectangles are real geometry with an interior atlas — depth, curtains, room colour and brightness variation. Offices light whole floors; homes scatter warm windows. Tune colour and brightness to keep the city from looking uniform.</p></div></div>
+      <div class="fcard"><img loading="lazy" decoding="async" src="assets/skettch-demo-1.gif" alt=""><div class="body"><span class="tag">Landmarks</span><h3>Planner-placed landmarks</h3><p>Ferris wheel, clock tower, stadium, cranes, water tanks, factories, parking decks, pylons, broadcast masts. A site planner scores district, water, high ground and camera distance before placing each one.</p></div></div>
+      <div class="fcard"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/c3f3bff265d5922fdf53f5fe1f98586b.jpg" alt=""><div class="body"><span class="tag">Infrastructure</span><h3>Bridges, viaducts, railways</h3><p>Water crossings become suspension bridges; roads get ramps and elevated sections; train sets run on their own routes with lit windows — with animated movement.</p></div></div>
+      <div class="fcard"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/0ed74d26c21ad25134de4078e5e36611.jpg" alt=""><div class="body"><span class="tag">Terrain &amp; water</span><h3>Shorelines, piers and reflections</h3><p>Generate a terrain mesh or sample your own ground object. Assign a water object and the city forms a shoreline with piers, moored ferries and boats; reflections come free from Cycles.</p></div></div>
+      <div class="fcard"><img loading="lazy" decoding="async" class="sequence" src="https://assets.superhivemarket.com/cache/759902a7d083de0cecaf4de3b9323db6.gif" alt="Animated DistantLightsFX demonstration" loading="lazy"><div class="body"><span class="tag">Living city</span><h3>Traffic, trains, helicopters, aircraft</h3><p>Head/tail-lit road cars, train sets, helicopters and aircraft passes with FAA-style nav lights, strobes and beacons. Twinkle and TV flicker without a single driver.</p></div></div>
+      <div class="fcard"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/9b28082613feeb8379d4378b7cb181c8.jpg" alt=""><div class="body"><span class="tag">Vegetation</span><h3>Trees that let the lights through</h3><p>Vegetation breaks up building silhouettes and adds another layer between the camera and the distant city lights.</p></div></div>
+      <div class="fcard"><img loading="lazy" decoding="async" src="assets/skettch-demo-2.gif" alt="Wind turbines on the city horizon"><div class="body"><span class="tag">Wind farms</span><h3>Wind turbines on the horizon</h3><p>Add wind turbines with rotating blades and obstruction lights. Adjust their amount to suit your scene.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= CAR GALLERY ================= -->
+<section id="gallery">
+  <div class="wrap">
+    <span class="eyebrow">In your shot</span>
+    <h2>Made for the background of a hero car</h2>
+    <p class="sub">Every skyline below is DistantLightsFX. The car, road and foreground are the user's scene — the add-on only fills the horizon. Click to enlarge.</p>
+    <div class="cars" style="margin-top:28px">
+      <figure data-full="https://assets.superhivemarket.com/cache/612678fec85ce1a3056edb039aa848c8.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/612678fec85ce1a3056edb039aa848c8.jpg" alt=""><figcaption>Rear three-quarter · sodium-amber carpet</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/dc505b945cba3c41855f0faeb7eab6ff.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/dc505b945cba3c41855f0faeb7eab6ff.jpg" alt=""><figcaption>Through a parking-deck opening</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/489d25e32927b45d5d255f419aa2b1d0.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/489d25e32927b45d5d255f419aa2b1d0.jpg" alt=""><figcaption>Rolling shot, skyline in motion blur</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/e0e53a3558e63e818749891cfc0cd401.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/e0e53a3558e63e818749891cfc0cd401.jpg" alt=""><figcaption>Parking lot · trees in front of the far city</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/135316b7b749f56ad445fbe27bacb4fb.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/135316b7b749f56ad445fbe27bacb4fb.jpg" alt=""><figcaption>Crane, pylons, water tank</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/978b1a53f05e3dfd7569b00e8b7d66b2.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/978b1a53f05e3dfd7569b00e8b7d66b2.jpg" alt=""><figcaption>Front three-quarter · blue hour</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/253ff65aa9b908fc1418cfdeb0f6cbd1.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/253ff65aa9b908fc1418cfdeb0f6cbd1.jpg" alt=""><figcaption>Dusk mood · pylon silhouette</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/395bf3cda8ebf65a1da204d14e0e51f0.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/395bf3cda8ebf65a1da204d14e0e51f0.jpg" alt=""><figcaption>Warm street-lamp horizon</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/004bcaf5d0157357e10721532c5fa2d8.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/004bcaf5d0157357e10721532c5fa2d8.jpg" alt=""><figcaption>Car park · city beyond</figcaption></figure>
+      <figure data-full="assets/skettch-demo-5.gif"><img loading="lazy" decoding="async" src="assets/skettch-demo-5.gif" alt=""><figcaption>Metropolis · elevated view between the towers</figcaption></figure>
+      <figure data-full="assets/skettch-demo-3.gif"><img loading="lazy" decoding="async" src="assets/skettch-demo-3.gif" alt=""><figcaption>City · layered rooftops at blue hour</figcaption></figure>
+      <figure data-full="https://assets.superhivemarket.com/cache/98ca98130e9e020a876c2c50843a9747.jpg"><img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/98ca98130e9e020a876c2c50843a9747.jpg" alt=""><figcaption>Metropolis on rolling terrain</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= PANEL TOUR ================= -->
+<section id="panel">
+  <div class="wrap">
+    <span class="eyebrow">Inside the panel</span>
+    <h2>Presets first. Detail when you need it.</h2>
+    <p class="sub">Everything lives in one N-panel tab. The top block is all most shots need; every section below it has its own presets and every setting explains what it corresponds to in the real world.</p>
+    <div class="tour" style="margin-top:28px">
+      <div class="tabs" id="tabs">
+        <button class="on" data-i="0">Overview <small>build &amp; presets</small></button>
+        <button data-i="1">Region &amp; Camera <small>where the city goes</small></button>
+        <button data-i="2">Terrain &amp; Water <small>ground, relief, boats</small></button>
+        <button data-i="3">City Layout <small>grid, piers, districts</small></button>
+        <button data-i="4">Buildings &amp; Facades <small>windows, materials</small></button>
+        <button data-i="5">Landmarks <small>what gets built</small></button>
+        <button data-i="6">Living City <small>traffic, aircraft, TV</small></button>
+        <button data-i="7">Atmosphere <small>haze, glow, twinkle</small></button>
+      </div>
+      <div class="tour-panel">
+        <div class="shot"><img loading="lazy" decoding="async" id="tourImg" src="https://assets.superhivemarket.com/cache/dcf2e1e0c07c7bd590dec97d8edeebf2.png" alt="DistantLightsFX panel"></div>
+        <div id="tourDesc">
+          <div class="desc on"><h3>Overview</h3><p class="muted">The five preset axes, seed, Build Draft / Build Full City, Lock City, Viewport Proxy and the build report.</p><ul><li>Place · Flavour · Busyness · Starts · Reaches · Mood — controls for character, scale, activity and lighting</li><li>Auto Update: change a value, see it live</li><li>Build report lists lights, buildings, landmark towers, lamps, cars and moving objects</li><li>Lock City freezes the bake; Viewport Proxy keeps the viewport light</li></ul></div>
+          <div class="desc"><h3>Region &amp; Camera</h3><p class="muted">The city is generated only where cameras look.</p><ul><li>All scene cameras or a chosen set; union of frustums with FOV margin</li><li>City Start Distance and Outer Radius (e.g. 800 m → 3.6 km)</li><li>Cover Camera Path samples an animated camera so the whole move is filled</li><li>Extend to Cameras adds coverage without moving what already exists — position-seeded layout</li><li>Safe Camera / View Clip raises Clip End only where needed</li></ul></div>
+          <div class="desc"><h3>Terrain &amp; Water</h3><p class="muted">Generated terrain or your own ground object.</p><ul><li>Terrain presets: Flat, Gentle Roll, Slope, Valley … with relief, scale and roughness</li><li>Protect Camera Height keeps the ground under your car where it is</li><li>Prepare Building &amp; Road Ground adds earthwork shoulders (default 12 m)</li><li>Assign a Water object → shoreline, piers, boats with count and speed</li></ul></div>
+          <div class="desc"><h3>City Layout &amp; Clustering</h3><p class="muted">How blocks, streets and districts are laid out.</p><ul><li>Block Grid or organic layout; block scale, street irregularity, grid angle</li><li>Terrain response: max street grade and plot slope (0.14 / 0.28 default)</li><li>Network Water Crossings: bridges up to a chosen span</li><li>Waterfront piers and moored ferries; land-use clusters and clustering strength</li></ul></div>
+          <div class="desc"><h3>Buildings &amp; Facades</h3><p class="muted">Where most of the realism lives.</p><ul><li>Coloured materials, silhouettes with max floors and floor pitch (3.6 m)</li><li>Window Interior Atlas: depth, office/home curtains, room colour &amp; brightness variation</li><li>Building light groups, lit-window ratio, Time of Night</li><li>Obstruction lights help tall structures read at night</li><li>Ground floor: shopfront glow, open shops, lobby level</li></ul></div>
+          <div class="desc"><h3>Landmarks &amp; Infrastructure</h3><p class="muted">Per-type amounts; available land limits the count.</p><ul><li>Power pylons with lattice bracing, telecom masts, chimneys, water towers, lit billboards</li><li>Factories and car parks with style variants and parked occupancy</li><li>Malls, stadium, broadcast mast, airport approach, wind farm (10–20 rpm, synchronised flash)</li><li>Bridges, elevated roads, railway with viaduct chance and train speed</li><li>Smart Placement — or drop your own DLFX_* Empties, which always win</li><li>Flavour-specific landmarks help distinguish each skyline</li></ul></div>
+          <div class="desc"><h3>Living City</h3><p class="muted">Everything that moves, keyframed from frame 0.</p><ul><li>Moving traffic: density, spacing, speed, light pairs with tail-vs-head balance</li><li>Helicopters with skyline clearance</li><li>Aircraft: count, altitude band, pass timing, nav lights, strobes (60/min), red beacon (45/min)</li><li>Television windows: ratio and flicker speed</li></ul></div>
+          <div class="desc"><h3>Atmosphere &amp; Light Appearance</h3><p class="muted">Depth cues and the look of every dot.</p><ul><li>Physical dot sizing: luminaire size and a 2-pixel floor so far lights never alias</li><li>Distance falloff, haze density and layer height, distance warming (Rayleigh)</li><li>Sky glow strength, height and colour</li><li>Twinkle from 500 m, full at ~2.5 km; optional window flicker</li><li>Render Safety check for the generated scene and animation</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= AXES ================= -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Preset axes</span>
+    <h2>Five independent dials</h2>
+    <p class="sub">Adjust the main preset controls to suit your shot. Mix a Village place with a Metropolis extent if that's the shot.</p>
+    <div class="axes" style="margin-top:24px">
+      <div class="axis"><h3>Place</h3><p>Metropolis, City, Suburb, Industrial, Village — massing, lamp colour and structures.</p></div>
+      <div class="axis"><h3>Busyness</h3><p>Traffic density, lit-window ratio, moving lights and activity.</p></div>
+      <div class="axis"><h3>Starts</h3><p>Where the city begins relative to the camera — from a few hundred metres to the far horizon.</p></div>
+      <div class="axis"><h3>Reaches</h3><p>How far the city extends — Small to a 3.6 km-plus Large metro.</p></div>
+      <div class="axis"><h3>Mood</h3><p>Day, Dusk, Night, Hazy Night, Late night — sky and lighting atmosphere. Window occupancy is controlled separately.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= SPECS + FAQ ================= -->
+<section>
+  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:48px" id="specs">
+    <div>
+      <span class="eyebrow">Specifications</span>
+      <h2>Compatibility</h2>
+      <table>
+        <tr><td>Blender</td><td>Designed for Blender 5.2.1</td></tr>
+        <tr><td>Render engine</td><td>Cycles for the showcased renders. Check the product listing for supported configurations.</td></tr>
+        <tr><td>Installation</td><td>Single ZIP via Preferences → Add-ons</td></tr>
+        <tr><td>Dependencies</td><td>None. Pure Python.</td></tr>
+        <tr><td>Render farms</td><td>Validate the generated scene with your chosen farm before production</td></tr>
+        <tr><td>Panel location</td><td>3D Viewport → N-panel → <b>DistantLightsFX</b></td></tr>
+        <tr><td>Typical build</td><td>Varies by hardware, coverage and detail; large builds can exceed one minute</td></tr>
+        <tr><td>Version</td><td>8.42.1</td></tr>
+      </table>
+    </div>
+    <div>
+      <span class="eyebrow">FAQ</span>
+      <h2>Common questions</h2>
+      <details open><summary>Is it a full 3D city?</summary><p>It is designed as a distant backdrop: silhouettes, lights and enough facade geometry to look right from a few hundred metres to the horizon. Not for street-level shots.</p></details>
+      <details><summary>Does it need Geometry Nodes or drivers?</summary><p>No. Everything is baked to plain meshes with attributes and keyframes. Check the completed scene with your render-farm workflow before submitting a production job.</p></details>
+      <details><summary>Can I keep my own HDRI sky?</summary><p>Yes. "Use Built-in Sky" is optional; Mood presets only touch the sky if you let them.</p></details>
+      <details><summary>What if I add a second camera later?</summary><p>Extend to Cameras adds coverage for the new view. Existing content stays exactly where it was — the layout is seeded from world position, not from the camera.</p></details>
+      <details><summary>How heavy is the scene?</summary><p>Scene size varies with the settings. Use Draft and Viewport Proxy while composing, and check the build report for your scene’s counts and timings.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section id="buy" style="padding-top:0">
+  <div class="wrap" style="text-align:center;background:linear-gradient(180deg,#0c1220,#060a13);border:1px solid var(--line);border-radius:20px;padding:56px 24px;position:relative;overflow:hidden">
+    <img loading="lazy" decoding="async" src="https://assets.superhivemarket.com/cache/89e0d2c3fa82132a396afe39ed6f3909.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;opacity:.28">
+    <div style="position:relative">
+      <h2>Put a city behind your car tonight</h2>
+      <p class="muted" style="max-width:560px;margin:0 auto 24px">Installable Blender add-on ZIP. Product details and support through Superhive.</p>
+      <a class="cta" href="#top">Back to the skyline</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="copy">© Skettch · DistantLightsFX · 2026</p>
+  <p class="ver">DistantLightsFX 8.42.1</p>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Enlarged render"><button type="button" class="lb-close" aria-label="Close enlarged render">×</button><img loading="lazy" decoding="async" id="lbImg" alt="Enlarged DistantLightsFX render"></dialog>
+
+<script>
+(function(){
+  // compare slider
+  var r=document.getElementById('cmpRange'),a=document.getElementById('cmpAfter'),h=document.getElementById('cmpHandle'),k=document.getElementById('cmpKnob');
+  function set(v){a.style.clipPath='inset(0 0 0 '+v+'%)';h.style.left=v+'%';k.style.left=v+'%';}
+  r.addEventListener('input',function(){set(r.value)});set(50);
+  // mood thumbs -> left image
+  var b=document.getElementById('cmpBefore'),ll=document.getElementById('lblL');
+  document.querySelectorAll('#moods button').forEach(function(btn){btn.addEventListener('click',function(){
+    document.querySelectorAll('#moods button').forEach(function(x){x.classList.remove('on')});btn.classList.add('on');
+    b.src=btn.dataset.src;ll.textContent=btn.dataset.name;});});
+  // panel tour
+  var panelSources=["https://assets.superhivemarket.com/cache/dcf2e1e0c07c7bd590dec97d8edeebf2.png", "https://assets.superhivemarket.com/cache/88c34ec7fa47dcf0d0bb29cb3ea45024.png", "https://assets.superhivemarket.com/cache/ef5cd55348340a11bf85662404aebcf7.png", "https://assets.superhivemarket.com/cache/35f1062c35a5e8511b9b0898e255560b.png", "https://assets.superhivemarket.com/cache/702ab7e20c86ac3e154f4c97d9c63f21.png", "https://assets.superhivemarket.com/cache/2e385f9786771b5ff8cda41b57cdacde.png", "https://assets.superhivemarket.com/cache/6b6a84b3fdd8913bd71ebd2d8a030790.png", "https://assets.superhivemarket.com/cache/f1e78436cf01ad66760b5726ff7cff6c.png"];
+  var imgs=['panel_sections','panel_main','panel_terrain','panel_layout','panel_facades','panel_landmarks','panel_living','panel_atmosphere'];
+  var ti=document.getElementById('tourImg'),descs=document.querySelectorAll('#tourDesc .desc');
+  document.querySelectorAll('#tabs button').forEach(function(btn){btn.addEventListener('click',function(){
+    document.querySelectorAll('#tabs button').forEach(function(x){x.classList.remove('on')});btn.classList.add('on');document.querySelectorAll('#tabs button').forEach(function(t){t.setAttribute('aria-pressed',t===btn?'true':'false')});
+    var i=+btn.dataset.i;ti.src=panelSources[i];descs.forEach(function(d,j){d.classList.toggle('on',j===i)});
+    ti.parentNode.scrollTop=0;});});
+  // lightbox
+  var lb=document.getElementById('lb'),li=document.getElementById('lbImg');
+  document.querySelectorAll('[data-full]').forEach(function(el){el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Enlarge render');el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});el.addEventListener('click',function(){li.src=el.dataset.full;lb.showModal()})});
+  lb.addEventListener('click',function(e){if(e.target!==li)lb.close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.close()});
+})();
+
+const characters=[{"name": "Generic", "src": "https://assets.superhivemarket.com/cache/85cb2c085649d37f77f71ebcfbd43524.jpg", "text": "A flexible city backdrop, from residential blocks to a denser tower silhouette."}, {"name": "Istanbul", "src": "https://assets.superhivemarket.com/cache/16294a8520e5dae000a5ee6ca77eb48d.jpg", "text": "Layered terrain, residential districts and a distinctive skyline."}, {"name": "Hong Kong", "src": "assets/hong-kong.jpg", "text": "A denser tower silhouette against the hills, with cooler windows and warm city accents."}];
+const charButtons=[...document.querySelectorAll('[data-character]')];
+function selectCharacter(index){const c=characters[index];document.getElementById('characterImage').src=c.src;document.getElementById('characterImage').alt=c.name+' skyline example';document.getElementById('characterTitle').textContent=c.name;document.getElementById('characterText').textContent=c.text;document.getElementById('character-panel').setAttribute('aria-labelledby','character-'+index);charButtons.forEach((b,i)=>{b.setAttribute('aria-selected',i===index?'true':'false');b.tabIndex=i===index?0:-1})}
+charButtons.forEach((b,i)=>{b.addEventListener('click',()=>selectCharacter(i));b.addEventListener('keydown',e=>{let j=i;if(e.key==='ArrowRight')j=(i+1)%charButtons.length;else if(e.key==='ArrowLeft')j=(i+charButtons.length-1)%charButtons.length;else if(e.key==='Home')j=0;else if(e.key==='End')j=charButtons.length-1;else return;e.preventDefault();selectCharacter(j);charButtons[j].focus()})});
+document.querySelectorAll('img').forEach(im=>{im.addEventListener('error',()=>{im.classList.add('image-error');im.alt='Image temporarily unavailable — '+(im.alt||'DistantLightsFX preview');});});
+</script>
+</body>
+</html>
